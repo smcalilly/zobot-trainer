@@ -1,2 +1,4 @@
 /intermediate/*
-!*/.gitkeep
+!intermediate/.gitkeep
+!intermediate/*/.gitkeep
+!intermediate/*/*/.gitkeep
