@@ -6,9 +6,27 @@ define get_articles
 	for row in $(cat intermediate/articles/links/test.json | jq '.'); do curl ${row}; done
 endef
 
-intermediate/articles/html/%.json : intermediate/articles/links/%.json
+trainer : $(GENERATED_FILES)
+	python3 scripts/train_gpt3.py
+
+output/gpt_training.json : intermediate/extracted/video_and_article_text/.%json
+	echo
+
+intermediate/extracted/video_and_article_text/.%json : intermediate/articles/source_video/%.json intermediate/articles/article_text/%.json 
+	echo
+
+intermediate/articles/video_text/%.json : intermediate/articles/source_video/%.json
+	echo
+
+intermediate/articles/video_text/%.json : intermediate/articles/raw_html/%.json
+	python3 scripts/extract_video.py
+
+intermediate/articles/article_text/%.json : intermediate/articles/raw_html/%.json
+	python3 scripts/article_text.py $< > $@
+
+intermediate/articles/raw_html/%.json : intermediate/articles/links/%.json
 	mkdir -p $(dir $@)
-	cat $< 
+	python3 scripts/get_html.py $< > $@
 
 intermediate/articles/links/%.json : intermediate/tweets/content/%.json
 	mkdir -p $(dir $@)
