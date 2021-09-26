@@ -1,3 +1,6 @@
 git+https://github.com/JustAnotherArchivist/snscrape.git
 google-cloud-videointelligence
 videocr
+openai
+lxml
+cssselect
