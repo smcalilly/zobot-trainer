@@ -26,9 +26,9 @@ def get_article_text(html):
 
 
 def get_article_summary(text):
-    api_key = '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'
+    api_key = ''
     openai.api_key = api_key
-    openai.organization = 'org-baVkaGFpBkbP2PQi9OmRwuIk'
+    openai.organization = ''
 
     prompt = f'My fifth grader asked me what this passage means:\n\"\"\"\n{text}\n\"\"\"\nI rephrased it for him, in plain language a second grader can understand:\n\"\"\"\n'
 
